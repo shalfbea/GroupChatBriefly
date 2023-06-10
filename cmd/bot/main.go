@@ -3,8 +3,10 @@ package main
 import (
 	"context"
 
+	"github.com/shalfbea/GroupChatBriefly/pkg/chatgpt"
 	"github.com/shalfbea/GroupChatBriefly/pkg/config"
 	"github.com/shalfbea/GroupChatBriefly/pkg/logger"
+	"github.com/shalfbea/GroupChatBriefly/pkg/telegram"
 	"go.uber.org/fx"
 	"go.uber.org/fx/fxevent"
 )
@@ -18,9 +20,12 @@ func main() {
 		fx.Provide(
 			config.LoadConfig,
 			logger.InitLogger,
-			//TODO, add telegram, chatgpt reg
+			chatgpt.InitGpt,
+			telegram.NewBot,
 		),
-		fx.Invoke(testRun),
+		fx.Invoke(
+			telegram.RunBot,
+		),
 		fx.WithLogger(
 			func() fxevent.Logger {
 				return fxevent.NopLogger

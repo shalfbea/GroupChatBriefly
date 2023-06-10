@@ -4,6 +4,7 @@ import (
 	"context"
 
 	openai "github.com/sashabaranov/go-openai"
+	"github.com/shalfbea/GroupChatBriefly/pkg/config"
 	"github.com/shalfbea/GroupChatBriefly/pkg/logger"
 )
 
@@ -18,9 +19,9 @@ type Chatgpt struct {
 	logger logger.Logger
 }
 
-func InitGpt(logger logger.Logger, apiKey string) *Chatgpt {
+func InitGpt(logger logger.Logger, config *config.Config) *Chatgpt {
 	return &Chatgpt{
-		client: openai.NewClient(apiKey),
+		client: openai.NewClient(config.OpenAiApiKey),
 		logger: logger,
 	}
 }
