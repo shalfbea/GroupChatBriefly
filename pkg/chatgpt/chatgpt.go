@@ -2,8 +2,9 @@ package chatgpt
 
 import (
 	"context"
+
 	openai "github.com/sashabaranov/go-openai"
-	"log"
+	"github.com/shalfbea/GroupChatBriefly/pkg/logger"
 )
 
 const promptStart = "Сделай краткий пересказ истории этой переписки. Оставляй имена:\n"
@@ -14,10 +15,10 @@ const testHistory = `Илья: Как здорово прошёл этот де�
 
 type Chatgpt struct {
 	client *openai.Client
-	logger *log.Logger
+	logger logger.Logger
 }
 
-func newChatGpt(logger *log.Logger, apiKey string) *Chatgpt {
+func InitGpt(logger logger.Logger, apiKey string) *Chatgpt {
 	return &Chatgpt{
 		client: openai.NewClient(apiKey),
 		logger: logger,
@@ -39,7 +40,7 @@ func (chatgpt *Chatgpt) Response(ctx context.Context, chatHistory string) (brief
 	)
 
 	if err != nil {
-		chatgpt.logger.Println()
+		chatgpt.logger.Errorf("CHATPGT: %v", err)
 		return
 	}
 

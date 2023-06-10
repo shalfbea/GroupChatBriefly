@@ -1,26 +1,24 @@
 package main
 
 import (
-	// "context"
 	"context"
-	"log"
 
 	"github.com/shalfbea/GroupChatBriefly/pkg/config"
-
-	//"os"
+	"github.com/shalfbea/GroupChatBriefly/pkg/logger"
 	"go.uber.org/fx"
 	"go.uber.org/fx/fxevent"
 )
 
-func testRun(cfg *config.Config) {
-	log.Printf("Here would be bot starting... Started with config: %+#v\n", *cfg)
+func testRun(cfg *config.Config, logger logger.Logger) {
+	logger.Infof("Here would be bot starting... Started with config: %+#v\n", *cfg)
 }
 
 func main() {
 	app := fx.New(
 		fx.Provide(
 			config.LoadConfig,
-			//TODO add logger, app struct
+			logger.InitLogger,
+			//TODO, add telegram, chatgpt reg
 		),
 		fx.Invoke(testRun),
 		fx.WithLogger(
@@ -31,6 +29,6 @@ func main() {
 	)
 	ctx := context.Background()
 	if err := app.Start(ctx); err != nil {
-		log.Fatal(err)
+		panic(err)
 	}
 }

@@ -14,8 +14,8 @@ type Messages struct {
 type Config struct {
 	TelegramToken  string
 	OpenAiApiKey   string
-	PollingTimeout int
-	DataBaseFile   string
+	PollingTimeout int64  `mapstructure:"polling_timeout"`
+	DataBaseFile   string `mapstructure:"db_file"`
 	Messages       Messages
 }
 
