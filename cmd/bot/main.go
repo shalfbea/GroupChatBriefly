@@ -24,6 +24,7 @@ func main() {
 			telegram.NewBot,
 		),
 		fx.Invoke(
+			testRun,
 			telegram.RunBot,
 		),
 		fx.WithLogger(

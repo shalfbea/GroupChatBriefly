@@ -16,6 +16,7 @@ type Config struct {
 	OpenAiApiKey   string
 	PollingTimeout int64  `mapstructure:"polling_timeout"`
 	DataBaseFile   string `mapstructure:"db_file"`
+	PromptStart    string `mapstructure:"prompt_start"`
 	Messages       Messages
 }
 

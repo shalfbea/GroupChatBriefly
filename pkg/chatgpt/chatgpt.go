@@ -8,25 +8,26 @@ import (
 	"github.com/shalfbea/GroupChatBriefly/pkg/logger"
 )
 
-const promptStart = "Сделай краткий пересказ истории этой переписки. Оставляй имена:\n"
-const testHistory = `Илья: Как здорово прошёл этот день! И погода замечательная в Москве, 18+!
+const TestHistory = `Илья: Как здорово прошёл этот день! И погода замечательная в Москве, 18+!
 Сергей:Уф уф,а у нас ужасно жарко, +30!
 Наташа:А в Брянске + 40,скорее бы вернуться!!
 Полина:как же вы много пишете...`
 
 type Chatgpt struct {
-	client *openai.Client
-	logger logger.Logger
+	client      *openai.Client
+	promptStart string
+	logger      logger.Logger
 }
 
 func InitGpt(logger logger.Logger, config *config.Config) *Chatgpt {
 	return &Chatgpt{
-		client: openai.NewClient(config.OpenAiApiKey),
-		logger: logger,
+		client:      openai.NewClient(config.OpenAiApiKey),
+		promptStart: config.PromptStart,
+		logger:      logger,
 	}
 }
 func (chatgpt *Chatgpt) Response(ctx context.Context, chatHistory string) (brief string, err error) {
-	content := promptStart + chatHistory
+	content := chatgpt.promptStart + chatHistory
 	resp, err := chatgpt.client.CreateChatCompletion(
 		context.Background(),
 		openai.ChatCompletionRequest{
