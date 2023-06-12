@@ -4,6 +4,7 @@ import (
 	"context"
 
 	"github.com/shalfbea/GroupChatBriefly/pkg/chatgpt"
+	"github.com/shalfbea/GroupChatBriefly/pkg/chathistory"
 	"github.com/shalfbea/GroupChatBriefly/pkg/config"
 	"github.com/shalfbea/GroupChatBriefly/pkg/logger"
 	"github.com/shalfbea/GroupChatBriefly/pkg/telegram"
@@ -20,6 +21,7 @@ func main() {
 		fx.Provide(
 			config.LoadConfig,
 			logger.InitLogger,
+			chathistory.InitChatHistory,
 			chatgpt.InitGpt,
 			telegram.NewBot,
 		),

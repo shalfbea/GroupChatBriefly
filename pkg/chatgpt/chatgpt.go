@@ -26,6 +26,7 @@ func InitGpt(logger logger.Logger, config *config.Config) *Chatgpt {
 		logger:      logger,
 	}
 }
+
 func (chatgpt *Chatgpt) Response(ctx context.Context, chatHistory string) (brief string, err error) {
 	content := chatgpt.promptStart + chatHistory
 	resp, err := chatgpt.client.CreateChatCompletion(
