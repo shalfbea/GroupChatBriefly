@@ -10,3 +10,5 @@ go.work
 .env
 *.db
 .vscode/settings.json
+log.log
+.vscode/launch.json
