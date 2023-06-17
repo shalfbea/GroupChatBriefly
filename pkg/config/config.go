@@ -21,7 +21,8 @@ type Config struct {
 }
 
 type Responses struct {
-	Start string `mapstructure:"start"`
+	Start        string `mapstructure:"start"`
+	LoadingBrief string `mapstructure:"loading_brief"`
 }
 
 type Errors struct {
