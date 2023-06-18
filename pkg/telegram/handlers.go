@@ -72,4 +72,16 @@ func (b *Bot) registerHandlers() {
 		_, err := b.StoreHistory(c, false, "*отправил фото*") //TODO: возможная расшифровка
 		return err
 	})
+
+	commands := []tele.Command{
+		{
+			Text:        "/preview",
+			Description: "Превью сохраненного диалога",
+		},
+		{
+			Text:        "/brief",
+			Description: "Вывод краткого содержания диалога. Удаляет историю",
+		},
+	}
+	b.bot.SetCommands(commands)
 }
