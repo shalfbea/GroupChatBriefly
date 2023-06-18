@@ -25,17 +25,29 @@ func (b *Bot) registerHandlers() {
 	})
 
 	b.bot.Handle(tele.OnAudio, func(c tele.Context) error {
-		_, err := b.StoreHistory(c, false, "*отправил аудио*") //TODO: возможная расшифровка
+		_, err := b.StoreHistory(c, false, "*отправил музыку*") //TODO: возможная расшифровка
 		return err
 	})
-
 	b.bot.Handle(tele.OnMedia, func(c tele.Context) error {
 		_, err := b.StoreHistory(c, false, "*отправил медиа*") //TODO: возможная расшифровка
 		return err
 	})
-
 	b.bot.Handle(tele.OnPhoto, func(c tele.Context) error {
 		_, err := b.StoreHistory(c, false, "*отправил фото*") //TODO: возможная расшифровка
+		return err
+	})
+
+	b.bot.Handle(tele.OnVoice, func(c tele.Context) error {
+		_, err := b.StoreHistory(c, false, "*отправил голосовое сообщение*") //TODO: возможная расшифровка
+		return err
+	})
+
+	b.bot.Handle(tele.OnVideo, func(c tele.Context) error {
+		_, err := b.StoreHistory(c, false, "*отправил видео*") //TODO: возможная расшифровка
+		return err
+	})
+	b.bot.Handle(tele.OnLocation, func(c tele.Context) error {
+		_, err := b.StoreHistory(c, false, "*отправил свою локацию*") //TODO: возможная расшифровка
 		return err
 	})
 }
