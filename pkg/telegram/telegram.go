@@ -37,7 +37,7 @@ func NewBot(config *config.Config, logger logger.Logger, chatgpt *chatgpt.Chatgp
 	}
 
 	bot.registerHandlers()
-
+	bot.registerCommands()
 	return bot, err
 }
 
