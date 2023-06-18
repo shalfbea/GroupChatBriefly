@@ -1,10 +1,12 @@
 package config
 
 import (
+	"errors"
+
 	"github.com/spf13/viper"
 )
 
-const ()
+var errEmptyToken = errors.New("empty token. Please, export TG_TOKEN and OPEN_AI to env")
 
 type Messages struct {
 	Responses
@@ -44,6 +46,9 @@ func LoadConfig() (*Config, error) {
 		return nil, err
 	}
 
+	if cfg.TelegramToken == "" || cfg.OpenAiApiKey == "" {
+		return nil, errEmptyToken
+	}
 	return &cfg, nil
 }
 
